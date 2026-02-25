@@ -54,16 +54,6 @@
             100% { border-color: #fff; box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); }
         }
 
-        h1 {
-            font-size: 28px;
-            text-align: center;
-            margin-top: 0;
-            text-transform: uppercase;
-            letter-spacing: 8px;
-            padding-bottom: 15px;
-            position: relative;
-        }
-
         .system-status {
             display: flex;
             justify-content: space-between;
@@ -199,15 +189,6 @@
             z-index: 1;
         }
 
-        .ascii-art {
-            font-size: 6px;
-            line-height: 6px;
-            text-align: center;
-            color: #222;
-            margin-bottom: 15px;
-            white-space: pre;
-        }
-
         /* PREVIEW IMAGES STYLES */
         .preview-wrapper {
             margin-top: 30px;
@@ -244,7 +225,7 @@
             background: #080808;
         }
 
-        /* NEW NAVIGATION BUTTONS STYLES */
+        /* NAVIGATION BUTTONS STYLES */
         .main-nav {
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
@@ -286,25 +267,12 @@
             <span>VER: 1.0.4</span>
         </div>
 
-        <h1>PAINED.CC</h1>
-
-        <div class="ascii-art">
-██████╗  █████╗ ██╗███╗   ██╗███████╗██████╗ 
-██╔══██╗██╔══██╗██║████╗  ██║██╔════╝██╔══██╗
-██████╔╝███████║██║██╔██╗ ██║█████╗  ██║  ██║
-██╔═══╝ ██╔══██║██║██║╚██╗██║██╔══╝  ██║  ██║
-██║     ██║  ██║██║██║ ╚████║███████╗██████╔╝
-╚═╝     ╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝╚══════╝╚═════╝ 
-        </div>
-
-        <!-- NEW NAVIGATION MENU -->
         <div class="main-nav">
             <button class="nav-tab-btn active" onclick="switchTab('script', this)">1 SCRIPT</button>
             <button class="nav-tab-btn" onclick="switchTab('injectors', this)">2 INJECTORS</button>
             <button class="nav-tab-btn" onclick="switchTab('preview', this)">3 PREVIEW</button>
         </div>
 
-        <!-- SECTION 1: SCRIPT -->
         <div id="section-script" class="content-section active">
             <div class="section-title">Execution String</div>
             <div class="script-box" id="scriptText">loadstring(game:HttpGet("https://raw.githubusercontent.com/miskabejbi-byte/w/refs/heads/main/w.lua"))()</div>
@@ -314,7 +282,6 @@
             <button class="discord-btn" id="discordBtn" onclick="discordSoon()">Discord Server</button>
         </div>
 
-        <!-- SECTION 2: INJECTORS -->
         <div id="section-injectors" class="content-section">
             <div class="section-title">Compatibility List</div>
             <div class="injectors-grid">
@@ -333,7 +300,6 @@
             </div>
         </div>
 
-        <!-- SECTION 3: PREVIEW -->
         <div id="section-preview" class="content-section">
             <div class="preview-wrapper">
                 <div class="section-title">Interface Preview</div>
@@ -362,17 +328,13 @@
     </div>
 
     <script>
-        // TAB SWITCHING LOGIC
         function switchTab(tabId, btn) {
-            // Hide all sections
             const sections = document.querySelectorAll('.content-section');
             sections.forEach(s => s.classList.remove('active'));
             
-            // Deactivate all buttons
             const buttons = document.querySelectorAll('.nav-tab-btn');
             buttons.forEach(b => b.classList.remove('active'));
             
-            // Show target section and activate button
             document.getElementById('section-' + tabId).classList.add('active');
             btn.classList.add('active');
         }
