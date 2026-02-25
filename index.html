@@ -16,15 +16,16 @@
             align-items: center;
             min-height: 100vh;
             margin: 0;
-            overflow: hidden;
+            overflow-y: auto;
             position: relative;
+            padding: 40px 0;
         }
 
         /* Scanline Effect Decoration */
         body::before {
             content: " ";
             display: block;
-            position: absolute;
+            position: fixed;
             top: 0;
             left: 0;
             bottom: 0;
@@ -174,6 +175,7 @@
             background-color: #080808;
             position: relative;
             overflow: hidden;
+            margin-bottom: 25px;
         }
 
         .pc-notice::before {
@@ -204,6 +206,42 @@
             color: #222;
             margin-bottom: 15px;
             white-space: pre;
+        }
+
+        /* PREVIEW IMAGES STYLES */
+        .preview-wrapper {
+            margin-top: 30px;
+            border-top: 1px solid #111;
+            padding-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .preview-item {
+            border: 1px solid #222;
+            background: #000;
+            overflow: hidden;
+        }
+
+        .preview-item img {
+            width: 100%;
+            display: block;
+            filter: brightness(0.9);
+            transition: 0.3s;
+        }
+
+        .preview-item img:hover {
+            filter: brightness(1);
+        }
+
+        .preview-label {
+            font-size: 8px;
+            color: #444;
+            padding: 5px;
+            text-transform: uppercase;
+            border-bottom: 1px solid #111;
+            background: #080808;
         }
     </style>
 </head>
@@ -248,6 +286,31 @@
         <div class="pc-notice">
             <span>PC ONLY</span>
             Optimized exclusively for Windows PC. Not for mobile devices.
+        </div>
+
+        <!-- UI PREVIEW SECTION WITH REAL IMAGES -->
+        <div class="preview-wrapper">
+            <div class="section-title">Interface Preview</div>
+            
+            <div class="preview-item">
+                <div class="preview-label">Main Menu / Combat</div>
+                <img src="menu.png" alt="Menu Preview">
+            </div>
+
+            <div class="preview-item">
+                <div class="preview-label">Explorer</div>
+                <img src="explorer.png" alt="Explorer Preview">
+            </div>
+
+            <div class="preview-item">
+                <div class="preview-label">Player Manager</div>
+                <img src="players.png" alt="Player Manager Preview">
+            </div>
+
+            <div class="preview-item" style="max-width: 200px; align-self: center;">
+                <div class="preview-label">Navigation</div>
+                <img src="nav.png" alt="Navigation Preview">
+            </div>
         </div>
     </div>
 
