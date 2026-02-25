@@ -243,6 +243,38 @@
             border-bottom: 1px solid #111;
             background: #080808;
         }
+
+        /* NEW NAVIGATION BUTTONS STYLES */
+        .main-nav {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 5px;
+            margin-bottom: 25px;
+        }
+
+        .nav-tab-btn {
+            background: #0a0a0a;
+            color: #444;
+            border: 1px solid #1a1a1a;
+            padding: 10px 5px;
+            font-size: 9px;
+            letter-spacing: 0;
+            margin-bottom: 0;
+        }
+
+        .nav-tab-btn.active {
+            background: #fff;
+            color: #000;
+            border-color: #fff;
+        }
+
+        .content-section {
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+        }
     </style>
 </head>
 <body>
@@ -265,56 +297,86 @@
 ╚═╝     ╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝╚══════╝╚═════╝ 
         </div>
 
-        <div class="section-title">Execution String</div>
-        <div class="script-box" id="scriptText">loadstring(game:HttpGet("https://raw.githubusercontent.com/miskabejbi-byte/w/refs/heads/main/w.lua"))()</div>
-        <button onclick="copyScript()">Copy to Clipboard</button>
-        <div class="success-msg" id="successMsg">SUCCESSFULLY COPIED</div>
-        
-        <button class="discord-btn" id="discordBtn" onclick="discordSoon()">Discord Server</button>
-
-        <div class="section-title">Compatibility List</div>
-        <div class="injectors-grid">
-            <div class="injector-item">Solara <div><span class="yes">YES</span><span class="buggy">(ESP BUGGY)</span></div></div>
-            <div class="injector-item">Bunni <span class="yes">YES</span></div>
-            <div class="injector-item">Velocity <span class="yes">YES</span></div>
-            <div class="injector-item">Volt <span class="yes">YES</span></div>
-            <div class="injector-item">Drift <span class="yes">YES</span></div>
-            <div class="injector-item">Swift <span class="yes">YES</span></div>
-            <div class="injector-item">Xeno <div><span class="yes">YES</span><span class="buggy">(ESP BUGGY)</span></div></div>
+        <!-- NEW NAVIGATION MENU -->
+        <div class="main-nav">
+            <button class="nav-tab-btn active" onclick="switchTab('script', this)">1 SCRIPT</button>
+            <button class="nav-tab-btn" onclick="switchTab('injectors', this)">2 INJECTORS</button>
+            <button class="nav-tab-btn" onclick="switchTab('preview', this)">3 PREVIEW</button>
         </div>
 
-        <div class="pc-notice">
-            <span>PC ONLY</span>
-            Optimized exclusively for Windows PC. Not for mobile devices.
-        </div>
-
-        <!-- UI PREVIEW SECTION WITH REAL IMAGES -->
-        <div class="preview-wrapper">
-            <div class="section-title">Interface Preview</div>
+        <!-- SECTION 1: SCRIPT -->
+        <div id="section-script" class="content-section active">
+            <div class="section-title">Execution String</div>
+            <div class="script-box" id="scriptText">loadstring(game:HttpGet("https://raw.githubusercontent.com/miskabejbi-byte/w/refs/heads/main/w.lua"))()</div>
+            <button onclick="copyScript()">Copy to Clipboard</button>
+            <div class="success-msg" id="successMsg">SUCCESSFULLY COPIED</div>
             
-            <div class="preview-item">
-                <div class="preview-label">Main Menu / Combat</div>
-                <img src="menu.png" alt="Menu Preview">
+            <button class="discord-btn" id="discordBtn" onclick="discordSoon()">Discord Server</button>
+        </div>
+
+        <!-- SECTION 2: INJECTORS -->
+        <div id="section-injectors" class="content-section">
+            <div class="section-title">Compatibility List</div>
+            <div class="injectors-grid">
+                <div class="injector-item">Solara <div><span class="yes">YES</span><span class="buggy">(ESP BUGGY)</span></div></div>
+                <div class="injector-item">Bunni <span class="yes">YES</span></div>
+                <div class="injector-item">Velocity <span class="yes">YES</span></div>
+                <div class="injector-item">Volt <span class="yes">YES</span></div>
+                <div class="injector-item">Drift <span class="yes">YES</span></div>
+                <div class="injector-item">Swift <span class="yes">YES</span></div>
+                <div class="injector-item">Xeno <div><span class="yes">YES</span><span class="buggy">(ESP BUGGY)</span></div></div>
             </div>
 
-            <div class="preview-item">
-                <div class="preview-label">Explorer</div>
-                <img src="explorer.png" alt="Explorer Preview">
+            <div class="pc-notice">
+                <span>PC ONLY</span>
+                Optimized exclusively for Windows PC. Not for mobile devices.
             </div>
+        </div>
 
-            <div class="preview-item">
-                <div class="preview-label">Player Manager</div>
-                <img src="players.png" alt="Player Manager Preview">
-            </div>
+        <!-- SECTION 3: PREVIEW -->
+        <div id="section-preview" class="content-section">
+            <div class="preview-wrapper">
+                <div class="section-title">Interface Preview</div>
+                
+                <div class="preview-item">
+                    <div class="preview-label">Main Menu / Combat</div>
+                    <img src="menu.png" alt="Menu Preview">
+                </div>
 
-            <div class="preview-item" style="max-width: 200px; align-self: center;">
-                <div class="preview-label">Navigation</div>
-                <img src="nav.png" alt="Navigation Preview">
+                <div class="preview-item">
+                    <div class="preview-label">Explorer</div>
+                    <img src="explorer.png" alt="Explorer Preview">
+                </div>
+
+                <div class="preview-item">
+                    <div class="preview-label">Player Manager</div>
+                    <img src="players.png" alt="Player Manager Preview">
+                </div>
+
+                <div class="preview-item" style="max-width: 200px; align-self: center;">
+                    <div class="preview-label">Navigation</div>
+                    <img src="nav.png" alt="Navigation Preview">
+                </div>
             </div>
         </div>
     </div>
 
     <script>
+        // TAB SWITCHING LOGIC
+        function switchTab(tabId, btn) {
+            // Hide all sections
+            const sections = document.querySelectorAll('.content-section');
+            sections.forEach(s => s.classList.remove('active'));
+            
+            // Deactivate all buttons
+            const buttons = document.querySelectorAll('.nav-tab-btn');
+            buttons.forEach(b => b.classList.remove('active'));
+            
+            // Show target section and activate button
+            document.getElementById('section-' + tabId).classList.add('active');
+            btn.classList.add('active');
+        }
+
         function copyScript() {
             const text = document.getElementById('scriptText').innerText;
             const success = document.getElementById('successMsg');
@@ -338,7 +400,3 @@
     </script>
 </body>
 </html>
-
-
-
-
