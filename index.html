@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pained.cc | pc</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
+
+        body {
+            background-color: #000;
+            color: #fff;
+            font-family: 'JetBrains+Mono', monospace;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* Scanline Effect Decoration */
+        body::before {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%), linear-gradient(90deg, rgba(255, 0, 0, 0.06), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.06));
+            z-index: 2;
+            background-size: 100% 2px, 3px 100%;
+            pointer-events: none;
+        }
+
+        .container {
+            width: 90%;
+            max-width: 500px;
+            background-color: #050505;
+            border: 1px solid #fff;
+            padding: 25px;
+            box-shadow: 0 0 30px rgba(255, 255, 255, 0.05);
+            position: relative;
+            z-index: 3;
+            animation: borderPulse 4s infinite;
+        }
+
+        @keyframes borderPulse {
+            0% { border-color: #fff; box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); }
+            50% { border-color: #444; box-shadow: 0 0 20px rgba(255, 255, 255, 0.2); }
+            100% { border-color: #fff; box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); }
+        }
+
+        h1 {
+            font-size: 28px;
+            text-align: center;
+            margin-top: 0;
+            text-transform: uppercase;
+            letter-spacing: 8px;
+            padding-bottom: 15px;
+            position: relative;
+        }
+
+        /* Glitch Decoration - Disabled as per previous request */
+        h1::after {
+            content: none; 
+            position: absolute;
+            left: 2px;
+            text-shadow: -1px 0 #ff0000;
+            top: 0;
+            color: #fff;
+            background: #050505;
+            overflow: hidden;
+            clip: rect(0, 900px, 0, 0);
+            animation: noise-anim 2s infinite linear alternate-reverse;
+        }
+
+        @keyframes noise-anim {
+            0% { clip: rect(10px, 9999px, 20px, 0); }
+            20% { clip: rect(30px, 9999px, 40px, 0); }
+            40% { clip: rect(50px, 9999px, 60px, 0); }
+            60% { clip: rect(70px, 9999px, 80px, 0); }
+            80% { clip: rect(90px, 9999px, 100px, 0); }
+            100% { clip: rect(110px, 9999px, 120px, 0); }
+        }
+
+        .system-status {
+            display: flex;
+            justify-content: space-between;
+            font-size: 9px;
+            color: #444;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #111;
+            padding-bottom: 5px;
+        }
+
+        .section-title {
+            font-size: 11px;
+            color: #fff;
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            background: #111;
+            display: inline-block;
+            padding: 3px 10px;
+            border: 1px solid #222;
+        }
+
+        .script-box {
+            background-color: #000;
+            border: 1px solid #222;
+            padding: 15px;
+            margin-bottom: 10px;
+            font-size: 10px;
+            word-break: break-all;
+            color: #666;
+            transition: 0.3s;
+        }
+
+        .script-box:hover {
+            color: #fff;
+            border-color: #444;
+        }
+
+        button {
+            width: 100%;
+            background-color: #fff;
+            color: #000;
+            border: none;
+            padding: 12px;
+            font-family: 'JetBrains+Mono', monospace;
+            font-weight: bold;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: 0.3s;
+            margin-bottom: 10px;
+            letter-spacing: 2px;
+        }
+
+        button:hover {
+            background-color: #888;
+            letter-spacing: 4px;
+        }
+
+        .discord-btn {
+            background-color: #000;
+            color: #fff;
+            border: 1px solid #fff;
+            margin-bottom: 20px;
+        }
+
+        .discord-btn:hover {
+            background-color: #fff;
+            color: #000;
+        }
+
+        .success-msg {
+            text-align: center;
+            font-size: 12px;
+            color: #fff;
+            height: 20px;
+            margin-top: -15px;
+            margin-bottom: 15px;
+            visibility: hidden;
+            text-decoration: underline;
+        }
+
+        .injectors-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 8px;
+            margin-bottom: 25px;
+        }
+
+        .injector-item {
+            background: #080808;
+            border: 1px solid #151515;
+            padding: 8px 12px;
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            text-transform: uppercase;
+        }
+
+        .yes { color: #fff; font-weight: bold; }
+        .no { color: #333; }
+
+        .pc-notice {
+            border: 1px solid #222;
+            padding: 15px;
+            text-align: center;
+            font-size: 10px;
+            color: #888;
+            background-color: #080808;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .pc-notice::before {
+            content: "!!!";
+            position: absolute;
+            left: -5px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 40px;
+            color: #111;
+            z-index: 0;
+        }
+
+        .pc-notice span {
+            display: block;
+            color: #fff;
+            font-weight: bold;
+            margin-bottom: 5px;
+            letter-spacing: 3px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .ascii-art {
+            font-size: 6px;
+            line-height: 6px;
+            text-align: center;
+            color: #222;
+            margin-bottom: 15px;
+            white-space: pre;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="system-status">
+            <span>STATUS: OPERATIONAL</span>
+            <span>OS: WINDOWS_X64</span>
+            <span>VER: 1.0.4</span>
+        </div>
+
+        <h1>PAINED.CC</h1>
+
+        <div class="ascii-art">
+██████╗  █████╗ ██╗███╗   ██╗███████╗██████╗ 
+██╔══██╗██╔══██╗██║████╗  ██║██╔════╝██╔══██╗
+██████╔╝███████║██║██╔██╗ ██║█████╗  ██║  ██║
+██╔═══╝ ██╔══██║██║██║╚██╗██║██╔══╝  ██║  ██║
+██║     ██║  ██║██║██║ ╚████║███████╗██████╔╝
+╚═╝     ╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝╚══════╝╚═════╝ 
+        </div>
+
+        <div class="section-title">Execution String</div>
+        <div class="script-box" id="scriptText">loadstring(game:HttpGet("https://raw.githubusercontent.com/miskabejbi-byte/w/refs/heads/main/w.lua"))()</div>
+        <button onclick="copyScript()">Copy to Clipboard</button>
+        <div class="success-msg" id="successMsg">SUCCESSFULLY COPIED</div>
+        
+        <button class="discord-btn" id="discordBtn" onclick="discordSoon()">Discord Server</button>
+
+        <div class="section-title">Compatibility List</div>
+        <div class="injectors-grid">
+            <div class="injector-item">Solara <span class="no">NO</span></div>
+            <div class="injector-item">Bunni <span class="yes">YES</span></div>
+            <div class="injector-item">Velocity <span class="yes">YES</span></div>
+            <div class="injector-item">Volt <span class="yes">YES</span></div>
+            <div class="injector-item">Drift <span class="yes">YES</span></div>
+            <div class="injector-item">Swift <span class="yes">YES</span></div>
+            <div class="injector-item">Xeno <span class="no">NO</span></div>
+        </div>
+
+        <div class="pc-notice">
+            <span>PC ONLY</span>
+            Optimized exclusively for Windows PC. Not for mobile devices.
+        </div>
+    </div>
+
+    <script>
+        function copyScript() {
+            const text = document.getElementById('scriptText').innerText;
+            const success = document.getElementById('successMsg');
+            
+            navigator.clipboard.writeText(text).then(() => {
+                success.style.visibility = 'visible';
+                setTimeout(() => {
+                    success.style.visibility = 'hidden';
+                }, 2000);
+            });
+        }
+
+        function discordSoon() {
+            const btn = document.getElementById('discordBtn');
+            const originalText = btn.innerText;
+            btn.innerText = "Soon.";
+            setTimeout(() => {
+                btn.innerText = originalText;
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
