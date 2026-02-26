@@ -279,7 +279,7 @@
             <button onclick="copyScript()">Copy to Clipboard</button>
             <div class="success-msg" id="successMsg">SUCCESSFULLY COPIED</div>
             
-            <button class="discord-btn" id="discordBtn" onclick="discordSoon()">Discord Server</button>
+            <button class="discord-btn" id="discordBtn" onclick="window.open('https://discord.gg/AazCEeajsY', '_blank')">Discord Server</button>
             <button class="discord-btn" onclick="window.open('https://www.roblox.com/games/102157289397495/hanetLoveINTIMs-Place#!/store', '_blank')">SUPPORT THE AUTHOR</button>
         </div>
 
@@ -353,12 +353,7 @@
         }
 
         function discordSoon() {
-            const btn = document.getElementById('discordBtn');
-            const originalText = btn.innerText;
-            btn.innerText = "Soon.";
-            setTimeout(() => {
-                btn.innerText = originalText;
-            }, 2000);
+            window.open('https://discord.gg/AazCEeajsY', '_blank');
         }
     </script>
 </body>
